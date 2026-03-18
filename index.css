@@ -17,7 +17,10 @@
 }
 
 body {
-    background: radial-gradient(circle at top right, #075985, #082f49);
+    background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
