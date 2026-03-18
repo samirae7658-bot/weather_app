@@ -110,6 +110,8 @@ function renderResults(results) {
 
 // --- Country Selection Mode Logic ---
 
+// --- Country Selection Logic ---
+
 async function populateCountries() {
     try {
         const response = await fetch(COUNTRIES_API);
@@ -125,22 +127,32 @@ async function populateCountries() {
     } catch (err) { console.error(err); }
 }
 
+let selectedCountryCode = '';
+let selectedCountryName = '';
+
 countrySelect.onchange = async (e) => {
-    const countryCode = e.target.value;
-    const countryName = countrySelect.options[countrySelect.selectedIndex].text;
-    citySelectWrapper.style.display = 'block';
-    citySelect.innerHTML = '<option value="" disabled selected>Loading cities...</option>';
+    selectedCountryCode = e.target.value;
+    selectedCountryName = countrySelect.options[countrySelect.selectedIndex].text;
     
-    // Use geocoding API to find major cities by searching for the country name itself
-    // and filtering by country code to get a list of locations IN that country.
+    // Reset city select
+    citySelect.innerHTML = '<option value="" disabled selected>Loading cities...</option>';
+    citySelectWrapper.style.display = 'none';
+
+    // Show city selection button area if hidden
+    // For this simple logic, we automatically fetch cities when country changes
+    fetchCitiesForCountry();
+};
+
+async function fetchCitiesForCountry() {
+    if (!selectedCountryCode) return;
+
     try {
-        const response = await fetch(`${GEOCODING_API}?name=${encodeURIComponent(countryName)}&count=100&language=en`);
+        const response = await fetch(`${GEOCODING_API}?name=${encodeURIComponent(selectedCountryName)}&count=100&language=en`);
         const data = await response.json();
         
         citySelect.innerHTML = '<option value="" disabled selected>Choose City</option>';
         if (data.results) {
-            // Filter results that belong to this country code and are likely cities/locations
-            const cities = data.results.filter(r => r.country_code === countryCode);
+            const cities = data.results.filter(r => r.country_code === selectedCountryCode);
             
             if (cities.length === 0) {
                 const opt = document.createElement('option');
@@ -155,12 +167,14 @@ countrySelect.onchange = async (e) => {
                     citySelect.appendChild(opt);
                 });
             }
+            // Once loaded, show the city select wrapper
+            citySelectWrapper.style.display = 'block';
         }
     } catch (err) { 
         console.error(err);
         citySelect.innerHTML = '<option value="" disabled selected>Error loading cities</option>';
     }
-};
+}
 
 citySelect.onchange = (e) => {
     const cityData = JSON.parse(e.target.value);
