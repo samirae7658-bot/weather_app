@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyward Weather | Modern Weather Insights</title>
+    <meta name="description" content="Discover real-time weather data for any city and country worldwide with Skyward, a modern and elegant weather application.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>Skyward</h1>
+
+        <div class="mode-selector">
+            <button class="mode-btn" id="btn-city">City Search</button>
+            <button class="mode-btn" id="btn-country">Select Country</button>
+        </div>
+
+        <div class="selection-container" id="selection-container">
+            <div class="select-wrapper">
+                <select id="country-select">
+                    <option value="" disabled selected>Choose Country</option>
+                </select>
+            </div>
+            <div class="select-wrapper" id="city-select-wrapper" style="display: none;">
+                <select id="city-select">
+                    <option value="" disabled selected>Choose City</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="search-container" id="search-container">
+            <input 
+                type="text" 
+                id="location-input" 
+                placeholder="Search for a city..." 
+                autocomplete="off"
+            >
+            <div id="results-dropdown"></div>
+        </div>
+
+        <div id="loader" class="loader"></div>
+
+        <div id="weather-info" class="weather-info">
+            <h2 id="display-city" class="location-name">City Name</h2>
+            <div id="display-country" class="country-name">Country Name</div>
+            
+            <div id="display-temp" class="temp">24<span>°C</span></div>
+            <div id="display-condition" class="condition">Sunny</div>
+            
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-label">Humidity</div>
+                    <div id="display-humidity" class="detail-value">45%</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-label">Wind Speed</div>
+                    <div id="display-wind" class="detail-value">12 km/h</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-label">Apparent Temp</div>
+                    <div id="display-apparent" class="detail-value">22°C</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-label">UV Index</div>
+                    <div id="display-uv" class="detail-value">3.4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
