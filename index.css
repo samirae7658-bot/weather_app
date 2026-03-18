@@ -17,7 +17,8 @@
 }
 
 body {
-    background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url('background.png');
+    background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), 
+                url('https://media.istockphoto.com/id/531889697/fi/valokuva/s%C3%A4%C3%A4ennusteen-konsepti.jpg?s=1024x1024&w=is&k=20&c=x3DkudMKrtlmOc10B_8KmxFRaJqHe6-ngZaNDBrx0aA=');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
